@@ -7,7 +7,13 @@ import bank.person.micros.types.Address;
 import bank.person.micros.types.enums.Gender;
 import bank.person.micros.types.enums.State;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Queue;
 
 @RestController
 public class PersonController {
@@ -48,11 +54,8 @@ public class PersonController {
     }
 
     @RequestMapping("/getallpersons")
-    public String getAllPersons () {
-
-        personService.getAllPersons();
-
-        return personService.getAllPersons().toString();
+    public List<Person> getAllPersons () {
+        return personService.getAllPersons();
     }
 
     @RequestMapping(method=RequestMethod.POST, value = "/updateperson")
@@ -97,6 +100,18 @@ public class PersonController {
 
         return "All persons were deleted";
     }
+
+    @RequestMapping("/getallpersonbychar")
+    public List<Person> getAllPersonsByFirstCharName () {
+        return personService.getAllPersonsByFirstCharName();
+    }
+
+    // read all people that are above the average weight of all people and from Israel
+    @RequestMapping("/allavgcit")
+    public List<Person> getAllIsraelCitizensAboveAverageWeight () {
+        return personService.getAllIsraelCitizensAboveAverageWeight();
+    }
+
 
     private Gender getGender (int genderId){
         switch(genderId){

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface PersonRepository extends MongoRepository<Person, String> {
+
     public Person findByName(String name);
-//    public List<Person> findByFirstCharName (char firstOption, char secondOption);
-//    public List<Person> allIsraelCitizensAboveAverageWeight();
+
 }
